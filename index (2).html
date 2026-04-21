@@ -1,0 +1,280 @@
+<html>
+<head>
+<title>Felipe ❤️ Íris</title>
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style> 
+body {
+  margin: 0;
+  background: linear-gradient(135deg, #8b0000, #ff4d6d);
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  color: white;
+  min-height: 100vh;
+  padding: 20px; 
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.container {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 600px;
+  padding: 30px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+h1 {
+  font-size: 50px;
+  margin-bottom: 20px;
+  text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+}
+
+p {
+  font-size: 22px;
+  margin-top: 10px;
+  line-height: 1.5;
+}
+
+.heart {
+  position: fixed;
+  top: -50px;
+  color: #ff4da6;
+  font-size: 30px;
+  animation: cair linear forwards;
+  pointer-events: none;
+}
+
+@keyframes cair {
+  to {
+    transform: translateY(110vh);
+    opacity: 0;
+  }
+}
+
+.galeria {
+  margin-top: 30px;
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 15px;
+  justify-items: center;
+}
+
+.card {
+  width: 220px;
+  height: 140px;
+  perspective: 1000px;
+}
+
+.card-inner {
+  width: 100%;
+  height: 100%;
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+  position: relative;
+}
+
+.card.ativo .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 15px;
+  backface-visibility: hidden;
+}
+
+.card-front img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 15px;
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background: #ff4d6d;
+  display: flex; 
+  justify-content: center;
+  align-items: center;
+  padding: 10px;
+  text-align: center;
+}
+
+button {
+  margin-top: 30px;
+  padding: 12px 20px;
+  border: none;
+  border-radius: 10px;
+  background: #ff4d6d;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #ff1f4d;
+  transform: scale(1.05);
+}
+.lateral {
+  position: fixed;
+  width: 180px;
+  border-radius: 15px;
+  opacity: 0.8;
+}
+
+/* lado esquerdo */
+.esquerda {
+  left: 20px;
+}
+
+/* lado direito */
+.direita {
+  right: 20px;
+}
+
+/* posição de cima */
+.lateral:not(.baixo) {
+  top: 120px;
+}
+
+/* posição de baixo */
+.baixo {
+  bottom: 120px;
+} 
+.lateral:hover {
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+</style>
+</head>
+
+<body>
+<img src="lado1.png" class="lateral esquerda">
+<img src="lado2.png" class="lateral direita">
+<img src="lado3.png" class="lateral esquerda baixo">
+<img src="lado4.png" class="lateral direita baixo">
+
+<div id="heart-container"></div>
+<div class="container">
+  <h1>❤️ Te amo, Íris ❤️</h1>
+  <p id="contador"></p>
+</div>
+
+<div class="galeria">
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-front">
+        <img src="foto1.jpeg">
+      </div>
+      <div class="card-back">
+        "Acima de tudo, porém, revistam-se do amor, que é o elo perfeito. COL 3:14"
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-front">
+        <img src="foto2.jpeg">
+      </div>
+      <div class="card-back">
+        "Quem encontra uma esposa encontra algo excelente; recebeu uma bênção do Senhor. PR 18:22"
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-front">
+        <img src="foto3.jpeg">
+      </div>
+      <div class="card-back">
+        "Uma mulher forte, quem a encontrará? Ela vale muito mais do que as joias. Pr 31:10"
+      </div>
+    </div>
+  </div>
+
+  <div class="card">
+    <div class="card-inner">
+      <div class="card-front">
+        <img src="foto4.jpeg">
+      </div>
+      <div class="card-back">
+        "Para onde fores, irei; onde tu repousares, repousarei. Teu Deus será o meu Deus."
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<audio id="musica" loop>
+  <source src="musica.mp3" type="audio/mpeg">
+</audio>
+
+<button id="botaoMusica" onclick="tocarMusica()">
+  Clique aqui 💌
+</button>
+
+<p style="margin-top:20px; font-size:18px;">
+  Cada segundo ao seu lado é o melhor presente que Deus me permitiu viver 💖
+</p>
+
+<script>
+const inicio = new Date("2025-04-17");
+
+function atualizarTempo() {
+  const agora = new Date();
+  const diferenca = agora - inicio;
+
+  const dias = Math.floor(diferenca / (1000*60*60*24));
+  const horas = Math.floor((diferenca % (1000*60*60*24)) / (1000*60*60));
+  const minutos = Math.floor((diferenca % (1000*60*60)) / (1000*60));
+  const segundos = Math.floor((diferenca % (1000*60)) / 1000);
+
+  document.getElementById("contador").innerText =
+    `Estamos juntos há ${dias} dias, ${horas} horas, ${minutos} minutos e ${segundos} segundos💖`;
+}
+
+setInterval(atualizarTempo, 1000);
+
+function criarHeart() {
+  const heart = document.createElement("div");
+  heart.classList.add("heart");
+  heart.innerText = "❤";
+
+  heart.style.left = Math.random() * 100 + "vw";
+  heart.style.fontSize = Math.random() * 20 + 10 + "px";
+  heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+
+  document.getElementById("heart-container").appendChild(heart);
+
+  setTimeout(() => {
+    heart.remove();
+  }, 5000);
+}
+
+setInterval(criarHeart, 300);
+
+document.querySelectorAll(".card").forEach(card => {
+  card.addEventListener("click", () => {
+    card.classList.toggle("ativo");
+  });
+});
+
+function tocarMusica() {
+  const musica = document.getElementById("musica");
+  musica.play();
+  alert("Não tenho o que falar, sou completamente apaixonado por você, de verdade, espero que você goste muito e podemos adicionar mais coisas quando quiser 💖");
+}
+</script>
+
+</body>
+</html>
